@@ -45,6 +45,12 @@ coverage run -m pytest
 coverage html
 ```
 
+#### Get a Python Wheel built for distribution
+
+```console
+python setup.py bdist_wheel
+```
+
 ### Package Layout
 
 I am following [Flask](https://flask.palletsprojects.com/en/2.0.x/tutorial/layout/)'s documentation about package layout.
