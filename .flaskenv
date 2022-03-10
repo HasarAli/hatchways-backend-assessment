@@ -1,0 +1,2 @@
+FLASK_APP=blog_api
+FLASK_RUN_PORT=8080
