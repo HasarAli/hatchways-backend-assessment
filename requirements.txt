@@ -1,17 +1,27 @@
 astroid==2.9.3
+attrs==21.4.0
+-e git+git@github.com:HasarAli/hatchways-backend-assessment.git@0a8ccc9f22afcd980dd5d814f6970b31917ca726#egg=blog_api
 click==8.0.4
+coverage==6.3.2
 Flask==2.0.3
+iniconfig==1.1.1
 isort==5.10.1
 itsdangerous==2.1.1
 Jinja2==3.0.3
 lazy-object-proxy==1.7.1
 MarkupSafe==2.1.0
 mccabe==0.6.1
+packaging==21.3
 platformdirs==2.5.1
+pluggy==1.0.0
+py==1.11.0
 pylint==2.12.2
 pylint-flask==0.6
 pylint-plugin-utils==0.7
+pyparsing==3.0.7
+pytest==7.0.1
 toml==0.10.2
+tomli==2.0.1
 typing-extensions==4.1.1
 Werkzeug==2.0.3
 wrapt==1.13.3

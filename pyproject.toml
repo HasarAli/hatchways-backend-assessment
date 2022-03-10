@@ -1,0 +1,7 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-sv"
+
+[tool.coverage.run]
+branch = true
+source = ["./blog_api"]
