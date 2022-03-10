@@ -1,6 +1,24 @@
-from flask import Flask
+from flask import Flask, jsonify
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from werkzeug.wrappers import Response
+
+# Error handling from Flask Docs
+class InvalidAPIUsage(Exception):
+    def __init__(self, error, status_code=400, payload=None):
+        super().__init__()
+        self.error = error
+        self.status_code = status_code
+        self.payload = payload
+
+    def to_dict(self):
+        rv = dict(self.payload or ())
+        rv['error'] = self.error
+        return rv
+
+
+def handle_invalid_api_usage(e):
+    return jsonify(e.to_dict()), e.status_code
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -24,5 +42,7 @@ def create_app(test_config=None):
     @app.route('/ping')
     def ping():
         return {"success": True}
+
+    app.register_error_handler(InvalidAPIUsage, handle_invalid_api_usage)
 
     return app
