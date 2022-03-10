@@ -1,5 +1,6 @@
 from flask import Flask
-
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from werkzeug.wrappers import Response
 
 def create_app(test_config=None):
     # create and configure the app
@@ -15,7 +16,12 @@ def create_app(test_config=None):
         # load the test config if passed in
         app.config.from_mapping(test_config)
 
-    @app.route('/api/ping')
+    app.wsgi_app = DispatcherMiddleware(
+        Response('Not Found', status=404),
+        {'/api': app.wsgi_app}
+    )
+
+    @app.route('/ping')
     def ping():
         return {"success": True}
 
