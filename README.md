@@ -16,7 +16,7 @@ source venv/bin/activate
 #### Install development requirements
 
 ```console
-python -m pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 #### Alternatively, install minimal requirements
@@ -32,6 +32,19 @@ export FLASK_APP=blog_api
 flask run
 ```
 
-### Package Structure
+#### Run tests
+
+```console
+pytest
+```
+
+#### Get test coverage report as HTML
+
+```console
+coverage run -m pytest
+coverage html
+```
+
+### Package Layout
 
 I am following [Flask](https://flask.palletsprojects.com/en/2.0.x/tutorial/layout/)'s documentation about package layout.
