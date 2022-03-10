@@ -43,6 +43,9 @@ def create_app(test_config=None):
     def ping():
         return {"success": True}
 
+    from . import blog 
+    app.register_blueprint(blog.bp)
+    
     app.register_error_handler(InvalidAPIUsage, handle_invalid_api_usage)
 
     return app
