@@ -1,3 +1,4 @@
+import json
 from blog_api import create_app
 
 def test_config():
@@ -6,6 +7,6 @@ def test_config():
 
 def test_ping(client):
     response = client.get("/api/ping")
-    print(response)
+    assert json.loads(response.data)["success"]
     assert response.status_code == 200
   
