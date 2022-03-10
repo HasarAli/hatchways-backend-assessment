@@ -1,0 +1,10 @@
+{
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true,
+  "python.linting.pylintArgs": [
+    "--load-plugins",
+    "pylint_flask",
+    "--init-hook",
+    "import sys; sys.path.insert(0, './blog_api')"
+  ]
+}
