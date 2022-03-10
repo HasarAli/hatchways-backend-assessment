@@ -2,7 +2,7 @@ anyio==3.5.0
 asgiref==3.5.0
 astroid==2.9.3
 attrs==21.4.0
--e git+git@github.com:HasarAli/hatchways-backend-assessment.git@f161ab30f81e903e86975933aee2f8e085511e20#egg=blog_api
+-e git+git@github.com:HasarAli/hatchways-backend-assessment.git@3245927c1a37c4589556d3f0abc92c785e9fe533#egg=blog_api
 certifi==2021.10.8
 charset-normalizer==2.0.12
 click==8.0.4
@@ -23,6 +23,7 @@ packaging==21.3
 platformdirs==2.5.1
 pluggy==1.0.0
 py==1.11.0
+py-memoize==1.1.3
 pylint==2.12.2
 pylint-flask==0.6
 pylint-plugin-utils==0.7

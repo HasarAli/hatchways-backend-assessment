@@ -1,7 +1,15 @@
 import asyncio
+from datetime import timedelta
 import httpx
 from flask import Blueprint, request
+from memoize.configuration import MutableCacheConfiguration, DefaultInMemoryCacheConfiguration
+from memoize.entrybuilder import ProvidedLifeSpanCacheEntryBuilder
+from memoize.eviction import LeastRecentlyUpdatedEvictionStrategy
+from memoize.key import EncodedMethodNameAndArgsKeyExtractor
+from memoize.storage import LocalInMemoryCacheStorage
+from memoize.wrapper import memoize
 from blog_api import InvalidAPIUsage
+
 
 URL = "https://api.hatchways.io/assessment/blog/posts"
 VALID_SORT = ["id", "reads", "likes", "popularity"]
@@ -35,6 +43,15 @@ def sort_posts(posts, sort_by, direction):
     return sorted(posts, key=lambda post: post[sort_by], reverse=direction == "desc")
 
 
+@memoize(configuration=MutableCacheConfiguration
+         .initialized_with(DefaultInMemoryCacheConfiguration())
+         .set_method_timeout(value=timedelta(minutes=2))
+         .set_entry_builder(ProvidedLifeSpanCacheEntryBuilder(update_after=timedelta(minutes=2),
+                                                              expire_after=timedelta(minutes=5)))
+         .set_eviction_strategy(LeastRecentlyUpdatedEvictionStrategy(capacity=4096))
+         .set_key_extractor(EncodedMethodNameAndArgsKeyExtractor(skip_first_arg_as_self=True))
+         .set_storage(LocalInMemoryCacheStorage())
+         )
 async def get_posts_with_tag(client, tag):
     response = await client.get(URL, params={"tag": tag})
     posts = response.json()["posts"]

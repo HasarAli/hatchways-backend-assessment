@@ -1,3 +1,4 @@
+from pickle import MEMOIZE
 from setuptools import find_packages, setup
 
 setup(
@@ -10,6 +11,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'flask[async]',
-        'httpx'
+        'httpx',
+        'py-memoize'
     ],
 )
